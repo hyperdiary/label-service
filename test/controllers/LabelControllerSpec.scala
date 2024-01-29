@@ -4,6 +4,7 @@ import org.scalatestplus.play.*
 import org.scalatestplus.play.guice.*
 import play.api.test.*
 import play.api.test.Helpers.*
+import repository.LabelRepository
 import services.LabelService
 
 /**
@@ -17,7 +18,7 @@ class LabelControllerSpec extends PlaySpec with GuiceOneAppPerTest with Injectin
   "HomeController GET" should {
 
     "render the index page from a new instance of controller" in {
-      val controller = new LabelController(stubControllerComponents(), new LabelService())
+      val controller = new LabelController(stubControllerComponents(), new LabelService(new LabelRepository()))
       val labelResult = controller.getLink("El Paso").apply(FakeRequest(GET, "/label/El%20Paso"))
 
       status(labelResult) mustBe OK
