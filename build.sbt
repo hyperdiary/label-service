@@ -11,6 +11,7 @@ libraryDependencies ++= Seq(
   guice,
   "org.eclipse.rdf4j" % "rdf4j-repository-http" % "4.3.9",
   "io.lemonlabs" %% "scala-uri" % "4.0.3",
+  "com.inrupt.client" % "inrupt-client-solid" % "1.1.0",
   "org.scalatestplus.play" %% "scalatestplus-play" % "7.0.0" % Test
 )
 

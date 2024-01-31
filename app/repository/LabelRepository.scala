@@ -16,7 +16,7 @@ class LabelRepository @Inject() {
   val repo: Repository = new HTTPRepository(rdf4jServer, repositoryID)
 
   // TODO (RW): it would be better to use https://github.com/phenoscape/sparql-utils here
-  def getLabel(label: String): Try[String] = {
+  def getLabelUri(label: String): Try[String] = {
     Using(repo.getConnection) { conn =>
       val tupleQuery: TupleQuery = conn.prepareTupleQuery(
       s"""PREFIX hd: <http://hyperdiary.io/terms/>
