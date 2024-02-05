@@ -9,8 +9,9 @@ import org.apache.commons.rdf.api.{Dataset, RDFSyntax}
 import org.eclipse.rdf4j.model.Model
 import org.eclipse.rdf4j.model.util.ModelBuilder
 
-import java.net.URI
-import scala.util.Try
+import java.io.{BufferedInputStream, FileInputStream}
+import java.net.{URI, URL}
+import scala.util.{Try, Using}
 
 class PodHandler {
 
@@ -34,8 +35,9 @@ class PodHandler {
 
   def readToDataset(filePath: String): Try[Dataset] = {
     val service = ServiceProvider.getRdfService // gets an RDF4JService instance
-    val input = this.getClass.getResourceAsStream("/tripleExamples.trig")
-    Try(service.toDataset(RDFSyntax.TURTLE, input, ""))
+    Using(new BufferedInputStream(new FileInputStream(filePath))) { input =>
+      service.toDataset(RDFSyntax.TURTLE, input, "")
+    }
   }
 
   def readToModel: Response[Model] = {

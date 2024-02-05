@@ -9,8 +9,9 @@ class PodHandlerSpec extends PlaySpec {
   "pod handler" must {
     "" in {
       val handler = new PodHandler()
-      handler.readToDataset("person.ttl") match {
-        case Success(dataset) => assert(dataset.size == 1)
+      val filePath = getClass.getResource("/person.ttl").getPath
+      handler.readToDataset(filePath) match {
+        case Success(dataset) => assert(dataset.size == 5)
         case Failure(e) => fail(e)
       }
     }

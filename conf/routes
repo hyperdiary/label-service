@@ -6,6 +6,11 @@
 # An example controller showing a sample home page
 GET     /                           controllers.LabelController.index()
 GET     /label/:label               controllers.LabelController.getLink(label: String)
+#GET     /pods                       controllers.PodController.getPods()
+#GET     /person/get                 controllers.PodController.getPerson()
+POST    /person/create              controllers.PodController.createPerson()
+#PUT     /person/update              controllers.PodController.updatePerson()
+#DELETE  /person/delete              controllers.PodController.deletePerson()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

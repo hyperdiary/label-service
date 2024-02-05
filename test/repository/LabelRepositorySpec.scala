@@ -10,7 +10,7 @@ class LabelRepositorySpec extends PlaySpec {
 
     "render the index page from a new instance of controller" in {
       val repository = new LabelRepository()
-      val res = repository.getLabelUri("El%20Paso")
+      val res = repository.getLabelUri("El Paso")
       res mustBe Success("http://dbpedia.org/resource/El_Paso,_Texas")
       //status(labelResult) mustBe OK
       //contentType(labelResult) mustBe Some(XML)

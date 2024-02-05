@@ -23,7 +23,7 @@ class LabelControllerSpec extends PlaySpec with GuiceOneAppPerTest with Injectin
 
       status(labelResult) mustBe OK
       contentType(labelResult) mustBe Some(XML)
-      contentAsString(labelResult) mustBe ("<a href=\"https://en.wikipedia.org/wiki/El_Paso,_Texas\"/>")
+      contentAsString(labelResult) mustBe ("<a class=\"dbpedia\" href=\"http://dbpedia.org/resource/El_Paso,_Texas\">El Paso</a>")
     }
 
   }
