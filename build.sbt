@@ -11,6 +11,7 @@ libraryDependencies ++= Seq(
   guice,
   "org.eclipse.rdf4j" % "rdf4j-repository-http" % "4.3.8",
   "io.lemonlabs" %% "scala-uri" % "4.0.3",
+  "org.apache.commons" % "commons-rdf-rdf4j" % "0.5.0",
   "com.inrupt.client" % "inrupt-client-solid" % "1.1.0",
   "com.inrupt.client" % "inrupt-client-core" % "1.1.0",
   "com.inrupt.client" % "inrupt-client-httpclient" % "1.1.0",

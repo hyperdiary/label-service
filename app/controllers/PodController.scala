@@ -4,7 +4,7 @@ import com.inrupt.client.auth.Session
 import com.inrupt.client.openid.OpenIdSession
 import com.inrupt.client.solid.{SolidClient, SolidSyncClient}
 import com.inrupt.client.webid.WebIdProfile
-import models.Person
+import models.json.JsonPerson
 import play.api.libs.json.{JsSuccess, JsValue, Json}
 import play.api.mvc.{Action, AnyContent, BaseController, ControllerComponents, Request}
 import services.PodService
@@ -35,9 +35,9 @@ class PodController @Inject()(val controllerComponents: ControllerComponents, po
 //  }
 
   def createPerson(): Action[JsValue] = Action.async(parse.json) { implicit request =>
-    request.body.validate[Person] match {
-      case JsSuccess(person,_) => 
-        podService.createPerson(person).asScala.map(_ => Created)
+    request.body.validate[JsonPerson] match {
+      case JsSuccess(jsonPerson,_) => 
+        podService.createPerson(jsonPerson.asRdfPerson).asScala.map(_ => Created)
       case _ => Future.successful(BadRequest("bad json body"))
     }
   }

@@ -5,20 +5,19 @@ import com.inrupt.client.solid.SolidRDFSource
 import com.inrupt.client.spi.RDFFactory
 import com.inrupt.client.{Headers, Resource}
 import com.inrupt.rdf.wrapping.commons.{ValueMappings, WrapperIRI}
-import models.Person
 import org.apache.commons.rdf.api.*
 import play.api.libs.json.{Json, OFormat, OWrites}
 
 import java.io.InputStream
 import java.net.URI
 
-case class Person(
+case class RdfPerson(
     identifier: URI,
     dataset: Dataset,
     syntax: RDFSyntax,
-    givenName: String,
-    surname: String,
-    headers: Option[Headers]
+    givenName: Option[String] = None,
+    surname: Option[String] = None,
+    headers: Option[Headers] = None
 ) extends SRDFSource(dataset, identifier, syntax, headers) {
 
 //  private val rdf: RDF = RDFFactory.getInstance
@@ -51,6 +50,9 @@ case class Person(
 
   override def close(): Unit = ???
 }
-object Person {
-  def apply(identifier: URI, dataset: Dataset): Person = Person(identifier, dataset)
+object RdfPerson {
+  def apply(identifier: URI, dataset: Dataset): RdfPerson = RdfPerson(
+    identifier,
+    dataset,
+    RDFSyntax.TURTLE)
 }

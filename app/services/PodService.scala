@@ -2,7 +2,7 @@ package services
 
 import com.inrupt.client.openid.OpenIdSession
 import com.inrupt.client.solid.SolidClient
-import models.Person
+import models.rdf.RdfPerson
 
 import java.net.URI
 import javax.inject.{Inject, Singleton}
@@ -18,8 +18,8 @@ class PodService @Inject() {
 
   private val client = SolidClient.getClient.session(session)
 
-  def createPerson(person: Person) = {
-    client.create(person)
+  def createPerson(rdfPerson: RdfPerson) = {
+    client.create(rdfPerson)
   }
 
 }
