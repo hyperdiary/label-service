@@ -1,16 +1,25 @@
-package models
+package models.rdf
 
-import com.inrupt.client.{Headers, Resource}
+import client.SRDFSource
 import com.inrupt.client.solid.SolidRDFSource
 import com.inrupt.client.spi.RDFFactory
+import com.inrupt.client.{Headers, Resource}
 import com.inrupt.rdf.wrapping.commons.{ValueMappings, WrapperIRI}
-import org.apache.commons.rdf.api.{Graph, IRI, RDF, RDFTerm}
+import models.Person
+import org.apache.commons.rdf.api.*
 import play.api.libs.json.{Json, OFormat, OWrites}
 
 import java.io.InputStream
 import java.net.URI
 
-case class Person(identifier: URI,  givenName: String, surname: String) extends Resource {
+case class Person(
+    identifier: URI,
+    dataset: Dataset,
+    syntax: RDFSyntax,
+    givenName: String,
+    surname: String,
+    headers: Option[Headers]
+) extends SRDFSource(dataset, identifier, syntax, headers) {
 
 //  private val rdf: RDF = RDFFactory.getInstance
 //
@@ -32,10 +41,9 @@ case class Person(identifier: URI,  givenName: String, surname: String) extends 
 //
 //  }
 
+  override def getIdentifier: URI = identifier
 
-  override def getIdentifier: URI = ???
-
-  override def getContentType: String = ???
+  override def getContentType: String = syntax.mediaType()
 
   override def getHeaders: Headers = ???
 
@@ -44,5 +52,5 @@ case class Person(identifier: URI,  givenName: String, surname: String) extends 
   override def close(): Unit = ???
 }
 object Person {
-  implicit val personFormat: OFormat[Person] = Json.format[Person]
+  def apply(identifier: URI, dataset: Dataset): Person = Person(identifier, dataset)
 }
